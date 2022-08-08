@@ -23,7 +23,7 @@ namespace LibraryService
 
         public LibraryWebService()
         {
-            _libraryRepositoryService = new LibraryRepository(new LibraryDatabaseContext());
+            _libraryRepositoryService = new LibraryRepository(new LibraryDatabaseContext(),new LibraryDatabaseContext());
         }
 
         [WebMethod]
@@ -42,6 +42,12 @@ namespace LibraryService
         public List<Book> GetBooksByCategory(string category)
         {
             return _libraryRepositoryService.GetByCategory(category).ToList();
+        }
+        [WebMethod]
+        public int Add(string title,string category)
+        {
+            Book book = new Book() { Title=title,Category=category};
+            return (int)_libraryRepositoryService.Add(book);
         }
     }
 }

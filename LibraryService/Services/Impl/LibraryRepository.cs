@@ -9,14 +9,17 @@ namespace LibraryService.Services.Impl
     public class LibraryRepository : ILibraryRepositoryService
     {
         private readonly ILibraryDatabaseContextService _dbContext;
+        private LibraryDatabaseContext _databaseContext;
 
-        public LibraryRepository(ILibraryDatabaseContextService dbContext)
+        public LibraryRepository(ILibraryDatabaseContextService dbContext, LibraryDatabaseContext databaseContext)
         {
             _dbContext = dbContext;
+            _databaseContext = databaseContext;
         }
         public int? Add(Book item)
         {
-            throw new NotImplementedException();
+           _databaseContext.WriteJson(item);
+            return 0;
         }
 
         public int Delete(Book item)
@@ -26,7 +29,7 @@ namespace LibraryService.Services.Impl
 
         public IList<Book> GetAll()
         {
-            throw new NotImplementedException();
+           return _dbContext.Books;
         }
 
         public IList<Book> GetByAuthor(string authorName)
