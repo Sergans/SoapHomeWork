@@ -1,20 +1,5 @@
 [
   {
-    "Id": "62c69902893de656b4fd0bfc",
-    "Title": "Ну-ну",
-    "Category": "Наука и техника",
-    "Lang": "fr",
-    "Pages": 582,
-    "AgeLimit": 6,
-    "Authors": [
-      {
-        "Name": "Жюль Верный",
-        "Lang": "fr"
-      }
-    ],
-    "PublicationDate": 1815
-  },
-  {
     "Id": "62c69a5f315cc9db8c47b13f",
     "Title": "SCRUM",
     "Category": "Красота, здоровье, спорт",
@@ -228,5 +213,20 @@
       }
     ],
     "PublicationDate": 2024
+  },
+  {
+    "Id": "62c69902893de656b4fd0bfc",
+    "Title": "Ну-Ну",
+    "Category": "Фантастика",
+    "Lang": "fr",
+    "Pages": 582,
+    "AgeLimit": 6,
+    "Authors": [
+      {
+        "Name": "Жюль Верный",
+        "Lang": "fr"
+      }
+    ],
+    "PublicationDate": 1815
   }
 ]

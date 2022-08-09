@@ -44,10 +44,25 @@ namespace LibraryService
             return _libraryRepositoryService.GetByCategory(category).ToList();
         }
         [WebMethod]
-        public int Add(string title,string category)
+        public int CreateBook(string id,string title,string category)
         {
-            Book book = new Book() { Title=title,Category=category};
+            Book book = new Book() { Id=id,Title=title,Category=category};
             return (int)_libraryRepositoryService.Add(book);
         }
+        [WebMethod]
+        public int DeleteBook(string id)
+        {
+           var book=_libraryRepositoryService.GetById(id);
+            return (int)_libraryRepositoryService.Delete(book);
+        }
+        [WebMethod]
+        public int UpdateBook(string id, string title, string category)
+        {
+            var book = _libraryRepositoryService.GetById(id);
+            book.Title=title;
+            book.Category=category;
+            return (int)_libraryRepositoryService.Update(book);
+        }
+
     }
 }

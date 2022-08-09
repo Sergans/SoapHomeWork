@@ -26,7 +26,10 @@ namespace LibraryService.Services.Impl
 
         public int Delete(Book item)
         {
-            throw new NotImplementedException();
+            var books = GetAll().ToList();
+            books.Remove(item);
+            _databaseContext.WriteJson(books);
+            return 0;
         }
 
         public IList<Book> GetAll()
@@ -49,7 +52,7 @@ namespace LibraryService.Services.Impl
 
         public Book GetById(string id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Books.FirstOrDefault(book => book.Id == id);
         }
 
         public IList<Book> GetByTitle(string title)
@@ -60,7 +63,11 @@ namespace LibraryService.Services.Impl
 
         public int Update(Book item)
         {
-            throw new NotImplementedException();
+            var books = GetAll().ToList();
+            books.Remove(item);
+            books.Add(item);
+            _databaseContext.WriteJson(books);
+            return 0;
         }
     }
 }
