@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
 using System.Web;
 
 
@@ -29,13 +32,18 @@ namespace LibraryService.Services.Impl
         }
         public void WriteJson(List<Book> book)
         {
+            var options = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                WriteIndented = true
+            };
+            string json = System.Text.Json.JsonSerializer.Serialize(book, options);
             string filePath = @"C:\Users\GANS\Desktop\SOAPHomeWork\LibraryService\Books.json";
-            string json = JsonConvert.SerializeObject(book);
             using (StreamWriter fileStream = new StreamWriter(filePath))
             {
                 fileStream.Write(json);
             }
-           // JsonSerializer.Serialize<Book>(fileStream, book);
+           
 
         }
     }
