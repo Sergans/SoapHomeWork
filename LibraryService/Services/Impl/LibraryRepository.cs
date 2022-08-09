@@ -18,7 +18,9 @@ namespace LibraryService.Services.Impl
         }
         public int? Add(Book item)
         {
-           _databaseContext.WriteJson(item);
+            List<Book>books =GetAll().ToList();
+            books.Add(item);
+           _databaseContext.WriteJson(books);
             return 0;
         }
 

@@ -42,6 +42,38 @@ namespace LibraryService.Web.Controllers
 
             return View(bookCategoryViewModel);
         }
+        public ActionResult CreateBook()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateBook(BookViewModel model)
+        {
+            LibraryWebServiceSoapClient libraryWebServiceSoapClient = new
+               LibraryWebServiceSoapClient(LibraryWebServiceSoapClient.EndpointConfiguration.LibraryWebServiceSoap12);
+            List<Author>authors = new List<Author>();
+            string[] autorpass = model.Authors.Split(',');
+            foreach (string autor in autorpass)
+            {
+                authors.Add(new Author() { Name = autor });
+            }
+            
+            var book = new Book()
+            {
+                Id = model.Id,
+                Title = model.Title,
+                Category = model.Category,
+                Lang = model.Lang,
+                Pages = model.Pages,
+                AgeLimit = model.AgeLimit,
+                PublicationDate = model.PublicationDate,
+                Authors=authors.ToArray()
+
+            };
+            
+            return RedirectToAction("Index");
+        }
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

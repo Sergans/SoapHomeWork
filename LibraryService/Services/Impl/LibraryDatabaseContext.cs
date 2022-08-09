@@ -27,11 +27,14 @@ namespace LibraryService.Services.Impl
             _libraryDatabase =
                 JsonConvert.DeserializeObject<List<Book>>(Encoding.UTF8.GetString(Properties.Resources.books));
         }
-        public void WriteJson(Book book)
+        public void WriteJson(List<Book> book)
         {
             string filePath = @"C:\Users\GANS\Desktop\SOAPHomeWork\LibraryService\Books.json";
             string json = JsonConvert.SerializeObject(book);
-            FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate);
+            using (StreamWriter fileStream = new StreamWriter(filePath))
+            {
+                fileStream.Write(json);
+            }
            // JsonSerializer.Serialize<Book>(fileStream, book);
 
         }
